@@ -16,3 +16,29 @@ function validar(){
         return true;
     }
 }
+
+function calcular(){
+    valor01 = document.getElementById("txtValor01").value;
+    valor02 = document.getElementById("txtValor02").value;
+
+    if(valor01 != "" && valor02.length > 0){
+    //&& é igual a diferente !=
+        v1 = parseFloat(valor01);
+        v2 = parseFloat(valor02);
+        // parseFloat serve para transformar o número em float
+        numero = {
+            n1 : v1 , 
+            n2 : v2 ,
+            somar : function(){
+                return this.n1 + this.n2;
+                //this. serve para chamar a chave de fora da função
+            }, 
+            subtrair : function(){
+                return this.n1 - this.n2;
+            }
+        };
+        document.getElementById("pResult").innerHTML = 
+            "Soma: " + numero.somar() + 
+            "<BR>Subtração: " + numero.subtrair();
+    }    
+}
