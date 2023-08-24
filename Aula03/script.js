@@ -7,3 +7,15 @@ $(document).ready( function(){
         $("#minhaDiv").text("<i>Pessoal</>");
     }
 );
+
+$( function(){
+
+    $("#btnAlterar").click( function(){
+        // $("#minhaDiv").hide(3000 , function(){
+        //    $("#minhaDiv").show(1000);
+        // });
+        $("#minhaDiv").toggle( 1000 );
+
+    });
+
+});
