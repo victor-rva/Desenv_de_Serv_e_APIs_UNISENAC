@@ -72,4 +72,5 @@ function inserirProdutos(){
     nome = document.getElementById("txtNome").value;
     preco = document.getElementById("txtPreco").value;
     xhttp.send("nome=" + nome + "&preco=" + preco);
+
 }
