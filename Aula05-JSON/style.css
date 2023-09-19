@@ -60,3 +60,25 @@ hr {
     background-color: #f3f3f3;
 }
 
+#divProdutos table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#divProdutos th, #divProdutos td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+#divProdutos th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#divProdutos tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
