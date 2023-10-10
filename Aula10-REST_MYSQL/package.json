@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "knex": "^3.0.1",
+    "mysql": "^2.18.1",
+    "restify": "^11.1.0",
+    "restify-errors": "^8.0.2"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}
