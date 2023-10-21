@@ -29,12 +29,24 @@ servidor.get('/', (req, res, next) => {
     res.send('Bem-vindo(a) a API Loja!')
 });
 
+// Rota para criar um cadastro
+servidor.post('/clientes', (req, res, next) => {
+    kenx('clientes')
+    .insert(req.body)
+    .then((dados) => {
+        res.send(dados);
+    }, next);
+});
+
+
+// Rota para consultar todos produtos
 servidor.get('/produtos', (req, res, next) => {
     knex('produtos').then((dados) => {
         res.send(dados);
     }, next);
 });
 
+// Rota para consultar um produto
 servidor.get('/produtos/:id', (req, res, next) => {
     const idProduto = req.params.idProd;
     knex('produtos')
@@ -64,6 +76,25 @@ servidor.get('/pedidos/:id', (req, res, next) => {
         }, next);
 });
 
+// Rota para criar um pedido
+servidor.post('/pedidos', (req, res, next) => {
+    knex('pedidos')
+        .insert(req.body)
+        .then((dados) => {
+            res.send(dados);
+        }, next);
+});
+
+// Rota para criar um pedido
+servidor.post('/pedidos', (req, res, next) => {
+    knex('pedidos')
+        .insert(req.body)
+        .then((dados) => {
+            res.send(dados);
+        }, next);
+});
+
+// criação de produtos
 servidor.post('/produtos', (req, res, next) => {
     knex('produtos')
         .insert(req.body)
@@ -72,7 +103,7 @@ servidor.post('/produtos', (req, res, next) => {
         }, next);
 });
 
-
+// atualização de produtos
 servidor.put('/produtos/update/:id', (req, res, next) => {
     const idProduto = req.params.id;
     knex('produtos')
@@ -86,6 +117,7 @@ servidor.put('/produtos/update/:id', (req, res, next) => {
         }, next);
 });
 
+// exclusão de produtos
 servidor.del('/produtos/:id', (req, res, next) => {
     const idProduto = req.params.id;
     knex('produtos')
@@ -96,5 +128,42 @@ servidor.del('/produtos/:id', (req, res, next) => {
                 return res.send(new errors.BadRequestError('Este produto não foi encontrado'));
             }
             res.send("Produto Deletado");
+        }, next);
+});
+
+// criação de pedidos
+servidor.post('/admin/pedidos', (req, res, next) => {
+    knex('pedidos')
+        .insert(req.body)
+        .then((dados) => {
+            res.send(dados);
+        }, next);
+});
+
+// atualização de pedidos
+servidor.put('/admin/pedidos/update/:id', (req, res, next) => {
+    const idPedido = req.params.id;
+    knex('pedidos')
+        .where('id', idPedido)
+        .update(req.body)
+        .then((dados) => {
+            if (!dados) {
+                return res.send(new errors.BadRequestError('Pedido não encontrado!'));
+            }
+            res.send("Pedido Atualizado!");
+        }, next);
+});
+
+// exclusão de pedidos
+servidor.del('/admin/produtos/:id', (req, res, next) => {
+    const idPedido = req.params.id;
+    knex('pedidos')
+        .where('id', idPedido)
+        .delete()
+        .then((dados) => {
+            if (!dados) {
+                return res.send(new errors.BadRequestError('Pedido não encontrado!'));
+            }
+            res.send("Pedido Deletado");
         }, next);
 });
