@@ -10,7 +10,8 @@ servidor.post('/clientes', (req, res, next) => {
 
 // Rota para consultar todos produtos
 servidor.get('/produtos', (req, res, next) => {
-    knex('produtos').then((dados) => {
+    knex('produtos')
+    .then((dados) => {
         res.send(dados);
     }, next);
 });
@@ -51,5 +52,33 @@ servidor.post('/pedidos', (req, res, next) => {
         .insert(req.body)
         .then((dados) => {
             res.send(dados);
+        }, next);
+});
+
+// atualização de pedidos
+servidor.put('/pedidos/update/:id', (req, res, next) => {
+    const idPedido = req.params.id;
+    knex('pedidos')
+        .where('id', idPedido)
+        .update(req.body)
+        .then((dados) => {
+            if (!dados) {
+                return res.send(new errors.BadRequestError('Pedido não encontrado!'));
+            }
+            res.send("Pedido Atualizado!");
+        }, next);
+});
+
+// exclusão de pedidos
+servidor.del('/pedidos/:id', (req, res, next) => {
+    const idPedido = req.params.id;
+    knex('pedidos')
+        .where('id', idPedido)
+        .delete()
+        .then((dados) => {
+            if (!dados) {
+                return res.send(new errors.BadRequestError('Pedido não encontrado!'));
+            }
+            res.send("Pedido Deletado");
         }, next);
 });
