@@ -31,7 +31,7 @@ servidor.get('/', (req, res, next) => {
 
 // Rota para criar um cadastro
 servidor.post('/clientes', (req, res, next) => {
-    kenx('clientes')
+    knex('clientes')
     .insert(req.body)
     .then((dados) => {
         res.send(dados);
