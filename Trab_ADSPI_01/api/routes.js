@@ -1,6 +1,6 @@
 // Rota para criar um cadastro
 servidor.post('/clientes', (req, res, next) => {
-    kenx('clientes')
+    knex('clientes')
     .insert(req.body)
     .then((dados) => {
         res.send(dados);
@@ -56,7 +56,7 @@ servidor.post('/pedidos', (req, res, next) => {
 });
 
 // atualização de pedidos
-servidor.put('/pedidos/update/:id', (req, res, next) => {
+servidor.put('/pedidos/:id', (req, res, next) => {
     const idPedido = req.params.id;
     knex('pedidos')
         .where('id', idPedido)

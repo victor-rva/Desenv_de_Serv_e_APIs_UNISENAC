@@ -8,7 +8,7 @@ servidor.post('/admin/produtos', (req, res, next) => {
 });
 
 // atualização de produtos
-servidor.put('/admin/produtos/update/:id', (req, res, next) => {
+servidor.put('/admin/produtos/:id', (req, res, next) => {
     const idProduto = req.params.id;
     knex('produtos')
         .where('id', idProduto)
@@ -36,14 +36,14 @@ servidor.del('/admin/produtos/:id', (req, res, next) => {
 });
 
 // pesquisar todos clientes
-servidor.get('/clientes', (req, res, next) => {
+servidor.get('/admin/clientes', (req, res, next) => {
     knex('clientes').then((dados) => {
         res.send(dados);
     }, next);
 });
 
 // pesquisar um cliente
-servidor.get('/clientes/:id', (req, res, next) => {
+servidor.get('/admin/clientes/:id', (req, res, next) => {
     const idCliente = req.params.idProd;
     knex('clientes')
         .where('id', idCliente) //id busca o id do banco
@@ -54,6 +54,20 @@ servidor.get('/clientes/:id', (req, res, next) => {
             }else{
                 res.send(dados);
             }
+        }, next);
+});
+
+// atualização cliente
+servidor.put('/admin/clientes/:id', (req, res, next) => {
+    const idCliente = req.params.id;
+    knex('clientes')
+        .where('id', idCliente)
+        .update()
+        .then((dados) => {
+            if (!dados) {
+                return res.send(new errors.BadRequestError('Cliente não encontrado!'));
+            }
+            res.send("Cliente Deletado");
         }, next);
 });
 
@@ -68,5 +82,23 @@ servidor.del('/admin/clientes/:id', (req, res, next) => {
                 return res.send(new errors.BadRequestError('Cliente não encontrado!'));
             }
             res.send("Cliente Deletado");
+        }, next);
+});
+
+// criação do post categorias
+servidor.post('/admin/categorias', (req, res, next) => {
+    knex('categorias')
+        .insert(req.body)
+        .then((dados) => {
+            res.send(dados);
+        }, next);
+});
+
+// criação de cidades
+servidor.post('/admin/cidades', (req, res, next) => {
+    knex('cidades')
+        .insert(req.body)
+        .then((dados) => {
+            res.send(dados);
         }, next);
 });
