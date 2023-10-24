@@ -44,7 +44,7 @@ servidor.get('/admin/clientes', (req, res, next) => {
 
 // pesquisar um cliente
 servidor.get('/admin/clientes/:id', (req, res, next) => {
-    const idCliente = req.params.idProd;
+    const idCliente = req.params.id;
     knex('clientes')
         .where('id', idCliente) //id busca o id do banco
         .first()

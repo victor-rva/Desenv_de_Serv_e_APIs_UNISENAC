@@ -52,7 +52,7 @@ servidor.get('/produtos', (req, res, next) => {
 
 // Rota para consultar um produto
 servidor.get('/produtos/:id', (req, res, next) => {
-    const idProduto = req.params.idProd;
+    const idProduto = req.params.id;
     knex('produtos')
         .where('id', idProduto) //id busca o id do banco
         .first()
@@ -67,7 +67,7 @@ servidor.get('/produtos/:id', (req, res, next) => {
 
 // Rota para consultar um pedido
 servidor.get('/pedidos/:id', (req, res, next) => {
-    const idPedido = req.params.idPed;
+    const idPedido = req.params.id;
     knex('pedidos')
         .where('id', idPedido) //id busca o id do banco
         .first()
@@ -115,6 +115,21 @@ servidor.del('/pedidos/:id', (req, res, next) => {
             }
             res.send("Pedido Deletado");
         }, next);
+});
+
+// pedidos_produtos
+servidor.post('/pedidos_produtos', (req, res, next) => {
+    knex('pedidos_produtos')
+        .insert(req.body)
+        .then((dados) => {
+            res.send(dados);
+        }, next);
+});
+
+servidor.get('/pedidos_produtos', (req, res, next) => {
+    knex('pedidos_produtos').then((dados) => {
+        res.send(dados);
+    }, next);
 });
 
 // --------------------- ADMIN --------------------------- //
@@ -165,7 +180,7 @@ servidor.get('/admin/clientes', (req, res, next) => {
 
 // pesquisar um cliente
 servidor.get('/admin/clientes/:id', (req, res, next) => {
-    const idCliente = req.params.idProd;
+    const idCliente = req.params.id;
     knex('clientes')
         .where('id', idCliente) //id busca o id do banco
         .first()

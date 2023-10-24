@@ -18,7 +18,7 @@ servidor.get('/produtos', (req, res, next) => {
 
 // Rota para consultar um produto
 servidor.get('/produtos/:id', (req, res, next) => {
-    const idProduto = req.params.idProd;
+    const idProduto = req.params.id;
     knex('produtos')
         .where('id', idProduto) //id busca o id do banco
         .first()
@@ -33,7 +33,7 @@ servidor.get('/produtos/:id', (req, res, next) => {
 
 // Rota para consultar um pedido
 servidor.get('/pedidos/:id', (req, res, next) => {
-    const idPedido = req.params.idPed;
+    const idPedido = req.params.id;
     knex('pedidos')
         .where('id', idPedido) //id busca o id do banco
         .first()
